@@ -6,8 +6,8 @@
 #define PPM_PIN 2
 #define POT_PIN 4
 
-#define POT_MIN 0      // Minimum potentiometer value
-#define POT_MAX 1023   // Maximum potentiometer value
+#define POT_MIN 1.35/4.69 * 1023       // Minimum potentiometer value
+#define POT_MAX 2.55/4.69 * 1023   // Maximum potentiometer value 1,35 2,55 4,69
 #define POT_RANGE (POT_MAX - POT_MIN) // Potentiometer range
 
 #define DEADZONE 50    // Define a deadzone value
@@ -58,10 +58,10 @@ void readPPM() {
     startTime = micros(); // Record the start time
   } else {
     pulseWidth = micros() - startTime; // Calculate the pulse width
-    if (pulseWidth < pulseWidthMin) {
+    if (pulseWidth < pulseWidthMin && pulseWidth > 800) {
       pulseWidthMin = pulseWidth; // Update minimum pulse width
     }
-    if (pulseWidth > pulseWidthMax) {
+    if (pulseWidth > pulseWidthMax && pulseWidth < 2200) {
       pulseWidthMax = pulseWidth; // Update maximum pulse width
     }
   }
